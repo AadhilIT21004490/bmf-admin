@@ -1,9 +1,14 @@
 import {
   Boxes,
   CalendarDays,
+  Car,
   ChartPie,
+  CircleUser,
   Component,
+  DollarSign,
   House,
+  Layout,
+  LogOut,
   Mail,
   MessageCircleMore,
   Server,
@@ -15,66 +20,92 @@ import {
 
 export const data = {
   navMain: [
-    {
-      title: "Dashboard",
-      url: "#",
-      icon: House,
-      isActive: true,
-      items: [
-        {
-          title: "AI",
-          url: "/dashboard",
-          circleColor: "bg-primary",
-        },
-        {
-          title: "CRM",
-          url: "/crm",
-          circleColor: "bg-yellow-500",
-        },
-        {
-          title: "eCommerce",
-          url: "/ecommerce",
-          circleColor: "bg-cyan-500",
-        },
-        {
-          title: "Cryptocurrency",
-          url: "/cryptocurrency",
-          circleColor: "bg-red-500",
-        },
-        {
-          title: "Investment",
-          url: "/investment",
-          circleColor: "bg-green-600",
-        },
-        {
-          title: "LMS / Learning System",
-          url: "/lms",
-          circleColor: "bg-violet-600",
-        },
-        {
-          title: "NFT & Gaming",
-          url: "/nft",
-          circleColor: "bg-primary",
-        },
-        {
-          title: "Medical",
-          url: "/medical",
-          circleColor: "bg-red-600",
-        },
-        {
-          title: "Analytics",
-          url: "/analytics",
-          circleColor: "bg-violet-600",
-        },
-        {
-          title: "POS & Inventory",
-          url: "/inventory",
-          circleColor: "bg-yellow-500",
-        },
-      ],
-    },
+    // {
+    //   title: "Dashboard",
+    //   url: "#",
+    //   icon: House,
+    //   isActive: true,
+    //   items: [
+    //     {
+    //       title: "AI",
+    //       url: "/dashboard",
+    //       circleColor: "bg-primary",
+    //     },
+    //     {
+    //       title: "CRM",
+    //       url: "/crm",
+    //       circleColor: "bg-yellow-500",
+    //     },
+    //     {
+    //       title: "eCommerce",
+    //       url: "/ecommerce",
+    //       circleColor: "bg-cyan-500",
+    //     },
+    //     {
+    //       title: "Cryptocurrency",
+    //       url: "/cryptocurrency",
+    //       circleColor: "bg-red-500",
+    //     },
+    //     {
+    //       title: "Investment",
+    //       url: "/investment",
+    //       circleColor: "bg-green-600",
+    //     },
+    //     {
+    //       title: "LMS / Learning System",
+    //       url: "/lms",
+    //       circleColor: "bg-violet-600",
+    //     },
+    //     {
+    //       title: "NFT & Gaming",
+    //       url: "/nft",
+    //       circleColor: "bg-primary",
+    //     },
+    //     {
+    //       title: "Medical",
+    //       url: "/medical",
+    //       circleColor: "bg-red-600",
+    //     },
+    //     {
+    //       title: "Analytics",
+    //       url: "/analytics",
+    //       circleColor: "bg-violet-600",
+    //     },
+    //     {
+    //       title: "POS & Inventory",
+    //       url: "/inventory",
+    //       circleColor: "bg-yellow-500",
+    //     },
+    //   ],
+    // },
+    
     {
       label: "Application",
+    },
+    {
+      title: "Insights",
+      url: "/ecommerce",
+      icon: Layout,
+    },
+    {
+      title: "Fleet Management",
+      url: "/fleetManagement",
+      icon: Car,
+    },
+    {
+      title: "Payment History",
+      url: "/paymentHistory",
+      icon: DollarSign,
+    },
+    {
+      title: "Profile Settings",
+      url: "/view-profile",
+      icon: CircleUser,
+    },
+    {
+      title: "Logout",
+      url: "#",
+      icon: LogOut,
     },
     {
       title: "Email",

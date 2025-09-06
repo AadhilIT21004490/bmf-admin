@@ -22,7 +22,7 @@ const metadata: Metadata = {
 const EcommercePage = () => {
   return (
     <>
-      <DashboardBreadcrumb title="eCommerce" text="eCommerce" />
+      <DashboardBreadcrumb title="Fleet Insights" text="Fleet Insights" />
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
 
