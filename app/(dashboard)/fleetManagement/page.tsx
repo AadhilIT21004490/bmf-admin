@@ -8,8 +8,9 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { Car, ChevronRight, PlusCircle, Upload } from "lucide-react";
+import { Car, ChevronRight, PlusCircle, Sheet, Upload } from "lucide-react";
 import Link from "next/link";
+// import { useRouter } from "next/navigation"
 
 const sellingProduct = [
     {
@@ -49,16 +50,35 @@ const sellingProduct = [
     },
 ];
 
+// const router = useRouter();
+
 const fleetmanagement = () => {
     return (
         <>
-        <div className="grid grid-cols-5 grid-rows-1 gap-4">
-            <div className="">
-                <button className="my-5 p-2 border rounded-md bg-blue-400 hover:bg-blue-900 inline-flex"><Upload size={20} className="mr-2"/>Export to Excel</button>
-            </div>
-            <div className="">
-                <button className="my-5 p-2 border rounded-md bg-green-600 hover:bg-green-800 inline-flex"><PlusCircle className="mr-2"/>Add a vehicle</button>
-            </div>
+        <h6>FLEET MANAGEMENT</h6>
+        <div className="flex items-center justify-between bg-gray-900 px-4 my-2 rounded-md">
+        {/* Search bar */}
+        <div className="flex-1 max-w-sm">
+            <input
+            type="text"
+            placeholder="Search..."
+            className="w-full my-5 px-3 py-2 border rounded-md bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+        </div>
+
+        {/* Buttons aligned right */}
+        <div className="flex space-x-4">
+            <button className="my-5 p-2 border rounded-md bg-blue-400 hover:bg-blue-900 inline-flex items-center">
+                <Sheet size={20} className="mr-2" />
+                Export to Excel
+            </button>
+            <Link href={"/addVehicle"}>
+                <button className="my-5 p-2 border rounded-md border-green-600 text-green-600 hover:bg-green-800 hover:text-white inline-flex items-center">
+                <PlusCircle className="mr-2" />
+                Add a vehicle
+                </button>
+            </Link>
+        </div>
         </div>
         <Table className="table-auto border-spacing-0 border-separate">
             <TableHeader>
