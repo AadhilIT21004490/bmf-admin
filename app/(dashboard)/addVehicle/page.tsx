@@ -21,6 +21,7 @@ const ViewProfile = () => {
   // Parent state for all tabs
   const [vehicleDetails, setVehicleDetails] = useState<any>({});
   const [priceDetails, setPriceDetails] = useState<any>({});
+  const [activeTab, setActiveTab] = useState<string>("vehicleDetails");
   const [images, setImages] = useState<File[]>([]);
 
   // Save all tab data
@@ -39,11 +40,12 @@ const ViewProfile = () => {
     setVehicleDetails({});
     setPriceDetails({});
     setImages([]);
+    setActiveTab("vehicleDetails"); // reset tab
   };
 
   return (
     <>
-      <div className="grid grid-cols-4 grid-rows-1 gap-4 rounded-md my-2 px-3 bg-gray-700">
+      <div className="grid grid-cols-4 grid-rows-1 gap-4 rounded-md my-2 px-3 bg-white dark:bg-[#273142]">
         <div >
                 <Link href="/fleetManagement">
                   <button
@@ -59,11 +61,11 @@ const ViewProfile = () => {
         </div>
       </div>          
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div className="grid grid-cols-4 grid-rows-1 gap-4 rounded-md my-2 px-3 bg-white dark:bg-[#273142]">
         <div className="col-span-12 lg:col-span-8">
           <Card className="card">
             <CardContent className="px-0">
-              <Tabs defaultValue="vehicleDetails" className="gap-4">
+              <Tabs value={activeTab}  onValueChange={(value: string) => setActiveTab(value)} className="gap-4">
                 <TabsList className="active-gradient bg-transparent dark:bg-transparent rounded-none h-[50px]">
                   <TabsTrigger value="vehicleDetails">Vehicle Details</TabsTrigger>
                   <TabsTrigger value="priceDetails">Price Details</TabsTrigger>
@@ -75,6 +77,12 @@ const ViewProfile = () => {
                     data={vehicleDetails}
                     setData={setVehicleDetails}
                   />
+                  <button
+                  className="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700"
+                  onClick={() => setActiveTab("priceDetails")}
+                  >
+                    Next
+                  </button>
                 </TabsContent>
 
                 <TabsContent value="priceDetails">
@@ -82,14 +90,17 @@ const ViewProfile = () => {
                     data={priceDetails}
                     setData={setPriceDetails}
                   />
+                  <button
+                  className="px-4 py-2 mt-3 rounded bg-green-600 text-white hover:bg-green-700"
+                  onClick={() => setActiveTab("imageUpload")}
+                  >
+                    Next
+                  </button>
                 </TabsContent>
 
                 <TabsContent value="imageUpload">
                   <VehicleImageUploader images={images} setImages={setImages} />
-                </TabsContent>
-              </Tabs>
-
-              {/* Parent Buttons */}
+                  {/* Parent Buttons */}
               <div className="flex justify-end mt-6 gap-3">
                 <button
                   onClick={handleReset}
@@ -104,6 +115,10 @@ const ViewProfile = () => {
                   Save All
                 </button>
               </div>
+                </TabsContent>
+              </Tabs>
+
+              
             </CardContent>
           </Card>
         </div>

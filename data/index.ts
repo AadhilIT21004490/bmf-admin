@@ -1,0 +1,21 @@
+  export const amenitiesOptions = [
+  "Airbags & Safety Kit",
+  "Reverse Camera / Parking Sensors",
+  "GPS Navigation System",
+  "Bluetooth / USB Audio",
+  "Air Conditioning (A/C)",
+  "Leather seats",
+  "Sunroof",
+  "Moonroof",
+  "Child / Baby Seats",
+  "Cruise Control",
+  "Keyless Entry / Push Button Start",
+  "Heated Seats / Steering Wheel",
+  "Rearview Mirror with Auto Dimming",
+  "Fog Lights / LED Headlights",
+  "Traction Control / Stability Control",
+  "Child Lock / Safety Locks",
+  "Roof Rack / Carrier",
+  "Cup Holders / Storage Compartments",
+  "Tire Pressure Monitoring System (TPMS)"
+];

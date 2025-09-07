@@ -1,5 +1,6 @@
 "use client";
 
+import { Switch } from "@/components/ui/switch";
 import {
     Table,
     TableBody,
@@ -13,41 +14,43 @@ import Link from "next/link";
 // import { useRouter } from "next/navigation"
 
 const sellingProduct = [
+    
     {
-        id: "#526534",
-        name: "Kathryn Murphy",
-        date: "25 Jan 2024",
-        amount: "$200.00",
-        action: "View More",
+        fleetCode:"BMF4568",
+        model:"Land Cruiser Prado",
+        menufacturer:"Toyota",
+        type:"SUV",
+        yom:"2022"
     },
     {
-        id: "#696589",
-        name: "Annette Black",
-        date: "25 Jan 2024",
-        amount: "$200.00",
-        action: "View More",
+        fleetCode:"BMF4568",
+        model:"Land Cruiser Prado",
+        menufacturer:"Toyota",
+        type:"SUV",
+        yom:"2022"
     },
     {
-        id: "#256584",
-        name: "Kathryn Murphy",
-        date: "10 Feb 2024",
-        amount: "$200.00",
-        action: "View More",
+        fleetCode:"BMF4568",
+        model:"Land Cruiser Prado",
+        menufacturer:"Toyota",
+        type:"SUV",
+        yom:"2022"
     },
     {
-        id: "#526587",
-        name: "Eleanor Pena	",
-        date: "10 Feb 2024",
-        amount: "$200.00",
-        action: "View More",
+        fleetCode:"BMF4568",
+        model:"Land Cruiser Prado",
+        menufacturer:"Toyota",
+        type:"SUV",
+        yom:"2022"
     },
     {
-        id: "#105986",
-        name: "Leslie Alexander",
-        date: "15 Mar 2024",
-        amount: "$200.00",
-        action: "View More",
+        fleetCode:"BMF4568",
+        model:"Land Cruiser Prado",
+        menufacturer:"Toyota",
+        type:"SUV",
+        yom:"2022"
     },
+    
 ];
 
 // const router = useRouter();
@@ -84,16 +87,22 @@ const fleetmanagement = () => {
             <TableHeader>
                 <TableRow className="border-0">
                     <TableHead className="px-4 h-12 border-e last:border-e-0 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600 rounded-tl-lg">
-                        Invoice
+                        Fleet Code
                     </TableHead>
                     <TableHead className="px-4 h-12 border-e last:border-e-0 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600">
-                        Name
+                        Model
                     </TableHead>
                     <TableHead className="px-4 h-12 border-e last:border-e-0 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600">
-                        Issued Date
+                        Menufacturer
                     </TableHead>
                     <TableHead className="px-4 h-12 border-e last:border-e-0 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600">
-                        Amount
+                        Vehicle Type
+                    </TableHead>
+                    <TableHead className="px-4 h-12 border-e last:border-e-0 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600">
+                        YOM
+                    </TableHead>
+                    <TableHead className="px-4 h-12 border-e last:border-e-0 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600">
+                        Availability
                     </TableHead>
                     <TableHead className="px-4 h-12 border-e last:border-e-0 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600 rounded-tr-lg">
                         Action
@@ -106,27 +115,35 @@ const fleetmanagement = () => {
                     const isLast = index === sellingProduct.length - 1;
                     return (
                         <TableRow key={index}>
-                            {/* Item */}
+                            {/* fleetcode */}
                             <TableCell
                                 className={`py-4 px-4 border-e last:border-e-0 border-b text-center text-primary first:border-s last:border-e border-neutral-200 dark:border-slate-600 ${isLast ? "rounded-bl-lg" : ""
                                     }`}
                             >
-                                {product.id}
+                                {product.fleetCode}
                             </TableCell>
 
-                            {/* name */}
+                            {/* model */}
                             <TableCell className="py-4 px-4 border-e last:border-e-0 border-b text-center first:border-s last:border-e border-neutral-200 dark:border-slate-600">
-                                {product.name}
+                                {product.model}
                             </TableCell>
 
-                            {/* date */}
+                            {/* menufacturer */}
                             <TableCell className="py-4 px-4 border-e last:border-e-0 border-b text-center first:border-s last:border-e border-neutral-200 dark:border-slate-600">
-                                {product.date}
+                                {product.menufacturer}
                             </TableCell>
 
-                            {/* amount */}
+                            {/* type */}
                             <TableCell className="py-4 px-4 border-e last:border-e-0 border-b text-center first:border-s last:border-e border-neutral-200 dark:border-slate-600">
-                                {product.amount}
+                                {product.type}
+                            </TableCell>
+                            {/* yom */}
+                            <TableCell className="py-4 px-4 border-e last:border-e-0 border-b text-center first:border-s last:border-e border-neutral-200 dark:border-slate-600">
+                                {product.yom}
+                            </TableCell>
+                            {/* availability */}
+                            <TableCell className="py-4 px-4 border-e last:border-e-0 border-b text-center first:border-s last:border-e border-neutral-200 dark:border-slate-600">
+                                <Switch id="availability" />
                             </TableCell>
 
                             {/* action */}
@@ -135,7 +152,7 @@ const fleetmanagement = () => {
                                     href="#"
                                     className="inline-flex items-center gap-1 text-primary dark:text-primary hover:text-blue-400 text-sm"
                                 >
-                                    {product.action}
+                                    
                                     <ChevronRight width={16} height={16} />
                                 </Link>
                             </TableCell>

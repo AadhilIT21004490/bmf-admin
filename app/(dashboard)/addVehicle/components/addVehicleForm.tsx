@@ -10,6 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {amenitiesOptions} from "@/data/index"
 import { Textarea } from "@/components/ui/textarea";
 
 interface AddVehicleFormProps {
@@ -22,18 +23,7 @@ const AddVehicleForm: React.FC<AddVehicleFormProps> = ({ data, setData }) => {
     setData((prev: any) => ({ ...prev, [key]: value }));
   };
 
-  const amenitiesOptions = [
-  "Airbags & Safety Kit",
-  "Reverse Camera / Parking Sensors",
-  "GPS Navigation System",
-  "Bluetooth / USB Audio",
-  "Air Conditioning (A/C)",
-  "Leather seats",
-  "Sunroof",
-  "Moonroof",
-  "Child / Baby Seats",
-  "Self-drive option",
-];
+
 
 const handleAmenityChange = (amenity: string, checked: boolean) => {
     setData((prev: any) => {
