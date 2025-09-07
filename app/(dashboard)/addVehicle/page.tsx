@@ -1,58 +1,98 @@
-import ChangePasswordTabContent from "@/app/(dashboard)/addVehicle/components/change-password-tab-content";
-import AddVehicleForm from "@/app/(dashboard)/addVehicle/components/edit-profile-tab-content";
-import NotificationPasswordTabContent from "@/app/(dashboard)/addVehicle/components/notification-password-tab-content";
-import ViewProfileSidebar from "@/app/(dashboard)/addVehicle/components/view-profile-sidebar";
+"use client";
+
+import { useState } from "react";
+import VehicleImageUploader from "@/app/(dashboard)/addVehicle/components/VehicleImageUploader";
+import AddVehicleForm from "@/app/(dashboard)/addVehicle/components/addVehicleForm";
+import PriceDetailsForm from "@/app/(dashboard)/addVehicle/components/PriceDetailsForm";
 import DashboardBreadcrumb from "@/components/layout/dashboard-breadcrumb";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { Metadata } from "next";
 
 const metadata: Metadata = {
-    title: "View Profile & User Details | WowDash Admin Dashboard",
-    description:
-        "Access detailed user profiles and personal information in the WowDash Admin Dashboard built with Next.js and Tailwind CSS.",
+  title: "View Profile & User Details | WowDash Admin Dashboard",
+  description:
+    "Access detailed user profiles and personal information in the WowDash Admin Dashboard built with Next.js and Tailwind CSS.",
 };
 
 const ViewProfile = () => {
-    return (
-        <>
-            <DashboardBreadcrumb title="Add Vehicle" text="Add Vehicle" />
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                
+  // Parent state for all tabs
+  const [vehicleDetails, setVehicleDetails] = useState<any>({});
+  const [priceDetails, setPriceDetails] = useState<any>({});
+  const [images, setImages] = useState<File[]>([]);
 
-                <div className="col-span-12 lg:col-span-8">
-                    <Card className="card">
-                        <CardContent className="px-0">
-                            <Tabs defaultValue="vehicleDetails" className="gap-4">
-                                <TabsList className='active-gradient bg-transparent dark:bg-transparent rounded-none h-[50px]'>
-                                    <TabsTrigger value="vehicleDetails" className='py-2.5 px-4 font-semibold text-sm inline-flex items-center gap-3 dark:bg-transparent text-neutral-600 hover:text-primary dark:text-white dark:hover:text-blue-500 data-[state=active]:bg-gradient border-0 border-t-2 border-neutral-200 dark:border-neutral-500 data-[state=active]:border-primary dark:data-[state=active]:border-primary rounded-[0] data-[state=active]:shadow-none cursor-pointer'>
-                                        Vehicle Details
-                                    </TabsTrigger>
-                                    <TabsTrigger value="priceDetails" className='py-2.5 px-4 font-semibold text-sm inline-flex items-center gap-3 dark:bg-transparent text-neutral-600 hover:text-primary dark:text-white dark:hover:text-blue-500 data-[state=active]:bg-gradient border-0 border-t-2 border-neutral-200 dark:border-neutral-500 data-[state=active]:border-primary dark:data-[state=active]:border-primary rounded-[0] data-[state=active]:shadow-none cursor-pointer'>
-                                        Price Details
-                                    </TabsTrigger>
-                                    <TabsTrigger value="imageUpload" className='py-2.5 px-4 font-semibold text-sm inline-flex items-center gap-3 dark:bg-transparent text-neutral-600 hover:text-primary dark:text-white dark:hover:text-blue-500 data-[state=active]:bg-gradient border-0 border-t-2 border-neutral-200 dark:border-neutral-500 data-[state=active]:border-primary dark:data-[state=active]:border-primary rounded-[0] data-[state=active]:shadow-none cursor-pointer'>
-                                        Image Upload
-                                    </TabsTrigger>
-                                </TabsList>
+  // Save all tab data
+  const handleSaveAll = () => {
+    const payload = {
+      vehicleDetails,
+      priceDetails,
+      images,
+    };
+    console.log("Saving all data:", payload);
+    // TODO: Call your API here to save
+  };
 
-                                <TabsContent value="vehicleDetails">
-                                    <AddVehicleForm />
-                                </TabsContent>
-                                <TabsContent value="priceDetails">
-                                    <NotificationPasswordTabContent />
-                                </TabsContent>
-                                <TabsContent value="imageUpload">
-                                    <ChangePasswordTabContent />
-                                </TabsContent>
-                            </Tabs>
-                        </CardContent>
-                    </Card>
+  // Reset all data
+  const handleReset = () => {
+    setVehicleDetails({});
+    setPriceDetails({});
+    setImages([]);
+  };
 
-                </div>
-            </div>
+  return (
+    <>
+      <DashboardBreadcrumb title="Add Vehicle" text="Add Vehicle" />
 
-        </>
-    );
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div className="col-span-12 lg:col-span-8">
+          <Card className="card">
+            <CardContent className="px-0">
+              <Tabs defaultValue="vehicleDetails" className="gap-4">
+                <TabsList className="active-gradient bg-transparent dark:bg-transparent rounded-none h-[50px]">
+                  <TabsTrigger value="vehicleDetails">Vehicle Details</TabsTrigger>
+                  <TabsTrigger value="priceDetails">Price Details</TabsTrigger>
+                  <TabsTrigger value="imageUpload">Image Upload</TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="vehicleDetails">
+                  <AddVehicleForm
+                    data={vehicleDetails}
+                    setData={setVehicleDetails}
+                  />
+                </TabsContent>
+
+                <TabsContent value="priceDetails">
+                  <PriceDetailsForm
+                    data={priceDetails}
+                    setData={setPriceDetails}
+                  />
+                </TabsContent>
+
+                <TabsContent value="imageUpload">
+                  <VehicleImageUploader images={images} setImages={setImages} />
+                </TabsContent>
+              </Tabs>
+
+              {/* Parent Buttons */}
+              <div className="flex justify-end mt-6 gap-3">
+                <button
+                  onClick={handleReset}
+                  className="px-4 py-2 rounded bg-red-500 text-white hover:bg-red-600"
+                >
+                  Reset
+                </button>
+                <button
+                  onClick={handleSaveAll}
+                  className="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700"
+                >
+                  Save All
+                </button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </>
+  );
 };
 export default ViewProfile;
