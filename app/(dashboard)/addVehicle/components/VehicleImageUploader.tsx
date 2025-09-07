@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Cropper from "react-easy-crop";
 import Dropzone from "react-dropzone";
 import { Button } from "@/components/ui/button";
-import { getCroppedImg } from "@/utils/cropImage"; // your helper function
+import { getCroppedImg } from "@/utils/cropImage"; // helper function
 
 interface VehicleImageUploaderProps {
   images: File[];
@@ -20,6 +20,13 @@ const VehicleImageUploader: React.FC<VehicleImageUploaderProps> = ({
 
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
+
+  // cleanup object URLs on unmount
+  useEffect(() => {
+    return () => {
+      images.forEach((file) => URL.revokeObjectURL(file as any));
+    };
+  }, [images]);
 
   const onCropComplete = useCallback((_: any, croppedAreaPixels: any) => {
     setCroppedAreaPixels(croppedAreaPixels);
@@ -39,8 +46,15 @@ const VehicleImageUploader: React.FC<VehicleImageUploaderProps> = ({
     if (!cropImage || !croppedAreaPixels) return;
     const croppedBase64 = await getCroppedImg(cropImage, croppedAreaPixels);
     const file = base64ToFile(croppedBase64, `vehicle_${Date.now()}.png`);
-    setImages((prev) => [...prev, file].slice(0, 6));
+
+    setImages((prev) => {
+      if (prev.length >= 6) return prev; // prevent exceeding 6
+      return [...prev, file];
+    });
+
     setCropImage(null);
+    setCrop({ x: 0, y: 0 });
+    setZoom(1);
   }, [cropImage, croppedAreaPixels, setImages]);
 
   const onCancel = () => {
@@ -95,12 +109,12 @@ const VehicleImageUploader: React.FC<VehicleImageUploaderProps> = ({
                 src={objectUrl}
                 alt={`Vehicle ${i}`}
                 className="w-full h-32 object-cover rounded-lg"
+                onLoad={() => URL.revokeObjectURL(objectUrl)} // revoke after load
               />
               {/* Delete Button */}
               <button
                 type="button"
                 onClick={() => {
-                  URL.revokeObjectURL(objectUrl); // revoke the URL, not the File
                   setImages((prev) => prev.filter((_, index) => index !== i));
                 }}
                 className="absolute top-1 right-1 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition"

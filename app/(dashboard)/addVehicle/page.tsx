@@ -12,9 +12,9 @@ import Link from "next/link";
 import { ArrowBigLeftDash } from "lucide-react";
 
 const metadata: Metadata = {
-  title: "View Profile & User Details | WowDash Admin Dashboard",
+  title: "Add a Vehicle Page",
   description:
-    "Access detailed user profiles and personal information in the WowDash Admin Dashboard built with Next.js and Tailwind CSS.",
+    "Add a Vehicle page for vendor admin dashboard.",
 };
 
 const ViewProfile = () => {

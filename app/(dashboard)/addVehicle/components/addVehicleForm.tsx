@@ -18,9 +18,33 @@ interface AddVehicleFormProps {
 }
 
 const AddVehicleForm: React.FC<AddVehicleFormProps> = ({ data, setData }) => {
-
   const handleChange = (key: string, value: any) => {
     setData((prev: any) => ({ ...prev, [key]: value }));
+  };
+
+  const amenitiesOptions = [
+  "Airbags & Safety Kit",
+  "Reverse Camera / Parking Sensors",
+  "GPS Navigation System",
+  "Bluetooth / USB Audio",
+  "Air Conditioning (A/C)",
+  "Leather seats",
+  "Sunroof",
+  "Moonroof",
+  "Child / Baby Seats",
+  "Self-drive option",
+];
+
+const handleAmenityChange = (amenity: string, checked: boolean) => {
+    setData((prev: any) => {
+      const currentAmenities = prev.amenities || [];
+      return {
+        ...prev,
+        amenities: checked
+          ? [...currentAmenities, amenity]
+          : currentAmenities.filter((a: string) => a !== amenity),
+      };
+    });
   };
 
   return (
@@ -32,9 +56,7 @@ const AddVehicleForm: React.FC<AddVehicleFormProps> = ({ data, setData }) => {
       <div className="grid grid-cols-1 sm:grid-cols-12 gap-x-6">
         {/* Model */}
         <div className="col-span-12 sm:col-span-6 mb-5">
-          <Label htmlFor="model" className="inline-block font-semibold text-neutral-600 dark:text-neutral-200 text-sm mb-2">
-            Model <span className="text-red-600">*</span>
-          </Label>
+          <Label htmlFor="model" className="mb-2">Model <span className="text-red-600">*</span></Label>
           <Input
             id="model"
             value={data.model || ""}
@@ -46,9 +68,7 @@ const AddVehicleForm: React.FC<AddVehicleFormProps> = ({ data, setData }) => {
 
         {/* Manufacturer */}
         <div className="col-span-12 sm:col-span-6 mb-5">
-          <Label htmlFor="manufacturer" className="inline-block font-semibold text-neutral-600 dark:text-neutral-200 text-sm mb-2">
-            Manufacturer <span className="text-red-600">*</span>
-          </Label>
+          <Label htmlFor="manufacturer" className="mb-2">Manufacturer <span className="text-red-600">*</span></Label>
           <Input
             id="manufacturer"
             value={data.manufacturer || ""}
@@ -58,11 +78,9 @@ const AddVehicleForm: React.FC<AddVehicleFormProps> = ({ data, setData }) => {
           />
         </div>
 
-        {/* Year of Manufacture */}
+        {/* Year */}
         <div className="col-span-12 sm:col-span-6 mb-5">
-          <Label htmlFor="year" className="inline-block font-semibold text-neutral-600 dark:text-neutral-200 text-sm mb-2">
-            Year of Manufacture <span className="text-red-600">*</span>
-          </Label>
+          <Label htmlFor="year" className="mb-2">Year of Manufacture <span className="text-red-600">*</span></Label>
           <Input
             id="year"
             type="number"
@@ -75,13 +93,10 @@ const AddVehicleForm: React.FC<AddVehicleFormProps> = ({ data, setData }) => {
 
         {/* Vehicle Type */}
         <div className="col-span-12 sm:col-span-6 mb-5">
-          <Label htmlFor="vehicleType" className="inline-block font-semibold text-neutral-600 dark:text-neutral-200 text-sm mb-2">
-            Vehicle Type <span className="text-red-600">*</span>
-          </Label>
+          <Label htmlFor="vehicleType" className="mb-2">Vehicle Type <span className="text-red-600">*</span></Label>
           <Select
             value={data.vehicleType || ""}
             onValueChange={(val) => handleChange("vehicleType", val)}
-            required
           >
             <SelectTrigger id="vehicleType">
               <SelectValue placeholder="Select Vehicle Type" />
@@ -99,13 +114,10 @@ const AddVehicleForm: React.FC<AddVehicleFormProps> = ({ data, setData }) => {
 
         {/* Transmission */}
         <div className="col-span-12 sm:col-span-6 mb-5">
-          <Label htmlFor="transmission" className="inline-block font-semibold text-neutral-600 dark:text-neutral-200 text-sm mb-2">
-            Transmission <span className="text-red-600">*</span>
-          </Label>
+          <Label htmlFor="transmission" className="mb-2">Transmission <span className="text-red-600">*</span></Label>
           <Select
             value={data.transmission || ""}
             onValueChange={(val) => handleChange("transmission", val)}
-            required
           >
             <SelectTrigger id="transmission">
               <SelectValue placeholder="Select Transmission" />
@@ -119,13 +131,10 @@ const AddVehicleForm: React.FC<AddVehicleFormProps> = ({ data, setData }) => {
 
         {/* Fuel Type */}
         <div className="col-span-12 sm:col-span-6 mb-5">
-          <Label htmlFor="fuelType" className="inline-block font-semibold text-neutral-600 dark:text-neutral-200 text-sm mb-2">
-            Fuel Type <span className="text-red-600">*</span>
-          </Label>
+          <Label htmlFor="fuelType" className="mb-2">Fuel Type <span className="text-red-600">*</span></Label>
           <Select
             value={data.fuelType || ""}
             onValueChange={(val) => handleChange("fuelType", val)}
-            required
           >
             <SelectTrigger id="fuelType">
               <SelectValue placeholder="Select Fuel Type" />
@@ -140,9 +149,7 @@ const AddVehicleForm: React.FC<AddVehicleFormProps> = ({ data, setData }) => {
 
         {/* Description */}
         <div className="col-span-12 mb-5">
-          <Label htmlFor="description" className="inline-block font-semibold text-neutral-600 dark:text-neutral-200 text-sm mb-2">
-            Description
-          </Label>
+          <Label htmlFor="description" className="mb-2">Description</Label>
           <Textarea
             id="description"
             value={data.description || ""}
@@ -153,9 +160,7 @@ const AddVehicleForm: React.FC<AddVehicleFormProps> = ({ data, setData }) => {
 
         {/* Doors */}
         <div className="col-span-12 sm:col-span-6 mb-5">
-          <Label htmlFor="doors" className="inline-block font-semibold text-neutral-600 dark:text-neutral-200 text-sm mb-2">
-            Doors
-          </Label>
+          <Label htmlFor="doors" className="mb-2">Doors</Label>
           <Input
             id="doors"
             type="number"
@@ -167,9 +172,7 @@ const AddVehicleForm: React.FC<AddVehicleFormProps> = ({ data, setData }) => {
 
         {/* Seats */}
         <div className="col-span-12 sm:col-span-6 mb-5">
-          <Label htmlFor="seats" className="inline-block font-semibold text-neutral-600 dark:text-neutral-200 text-sm mb-2">
-            Seats
-          </Label>
+          <Label htmlFor="seats" className="mb-2">Seats</Label>
           <Input
             id="seats"
             type="number"
@@ -181,9 +184,7 @@ const AddVehicleForm: React.FC<AddVehicleFormProps> = ({ data, setData }) => {
 
         {/* Km/Day */}
         <div className="col-span-12 sm:col-span-6 mb-5">
-          <Label htmlFor="kmPerDay" className="inline-block font-semibold text-neutral-600 dark:text-neutral-200 text-sm mb-2">
-            Km/Day
-          </Label>
+          <Label htmlFor="kmPerDay" className="mb-2">Km/Day</Label>
           <Input
             id="kmPerDay"
             type="number"
@@ -195,10 +196,8 @@ const AddVehicleForm: React.FC<AddVehicleFormProps> = ({ data, setData }) => {
 
         {/* Luggage Capacity */}
         <div className="col-span-12 sm:col-span-6 mb-5">
-          <Label htmlFor="luggageCapacity" className="inline-block font-semibold text-neutral-600 dark:text-neutral-200 text-sm mb-2">
-            Luggage Capacity
-          </Label>
-          <div className="grid grid-cols-2 gap-3">
+          <Label htmlFor="luggageCapacity">Luggage Capacity</Label>
+          <div className="grid grid-cols-2 gap-3 mt-2">
             <Input
               value={data.largeLuggage || ""}
               onChange={(e) => handleChange("largeLuggage", e.target.value)}
@@ -215,6 +214,27 @@ const AddVehicleForm: React.FC<AddVehicleFormProps> = ({ data, setData }) => {
             />
           </div>
         </div>
+
+        {/* Amenities */}
+        <div className="col-span-12 mb-5">
+          <Label className="block mb-2">Amenities</Label>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            {amenitiesOptions.map((item) => (
+              <label key={item} className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  checked={data.amenities?.includes(item) || false}
+                  onChange={(e) => handleAmenityChange(item, e.target.checked)}
+                  className="h-4 w-4"
+                />
+                <span className="text-sm text-neutral-700 dark:text-neutral-300">
+                  {item}
+                </span>
+              </label>
+            ))}
+          </div>
+        </div>
+        
       </div>
     </div>
   );
