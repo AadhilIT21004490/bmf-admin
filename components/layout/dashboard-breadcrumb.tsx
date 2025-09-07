@@ -18,6 +18,7 @@ interface BreadcrumbData {
 const DashboardBreadcrumb = ({ title, text }: BreadcrumbData) => {
     return (
         <div className='flex flex-wrap items-center justify-between gap-2 mb-6'>
+            
             <h6 className="text-2xl font-semibold">{title}</h6>
             <Breadcrumb>
                 <BreadcrumbList>

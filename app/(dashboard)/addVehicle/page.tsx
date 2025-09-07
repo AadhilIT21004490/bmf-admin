@@ -8,6 +8,8 @@ import DashboardBreadcrumb from "@/components/layout/dashboard-breadcrumb";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowBigLeftDash } from "lucide-react";
 
 const metadata: Metadata = {
   title: "View Profile & User Details | WowDash Admin Dashboard",
@@ -41,7 +43,21 @@ const ViewProfile = () => {
 
   return (
     <>
-      <DashboardBreadcrumb title="Add Vehicle" text="Add Vehicle" />
+      <div className="grid grid-cols-4 grid-rows-1 gap-4 rounded-md my-2 px-3 bg-gray-700">
+        <div >
+                <Link href="/fleetManagement">
+                  <button
+                  className="my-5 p-2 border rounded-md bg-blue-400 hover:bg-blue-900 inline-flex items-center"
+                  >
+                    <ArrowBigLeftDash/><strong>Back</strong>
+                  </button>
+                </Link>
+        </div>
+        <div className="col-span-3 mt-6">
+        <DashboardBreadcrumb title="Add Vehicle" text="Add Vehicle" />
+
+        </div>
+      </div>          
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <div className="col-span-12 lg:col-span-8">
