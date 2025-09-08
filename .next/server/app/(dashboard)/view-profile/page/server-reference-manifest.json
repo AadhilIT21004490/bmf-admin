@@ -1,0 +1,27 @@
+{
+  "node": {
+    "00149256e64808449f969ec4431dcc405c3ae5cf65": {
+      "workers": {
+        "app/(dashboard)/view-profile/page": {
+          "moduleId": "[project]/.next-internal/server/app/(dashboard)/view-profile/page/actions.js { ACTIONS_MODULE0 => \"[project]/components/auth/actions/logout.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/app/(dashboard)/view-profile/components/actions/handleProfileUpdate.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/(dashboard)/view-profile/page": "action-browser"
+      }
+    },
+    "40dff98f397e51bc84a7bbffb75f9682f91df329d1": {
+      "workers": {
+        "app/(dashboard)/view-profile/page": {
+          "moduleId": "[project]/.next-internal/server/app/(dashboard)/view-profile/page/actions.js { ACTIONS_MODULE0 => \"[project]/components/auth/actions/logout.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/app/(dashboard)/view-profile/components/actions/handleProfileUpdate.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/(dashboard)/view-profile/page": "action-browser"
+      }
+    }
+  },
+  "edge": {}
+}

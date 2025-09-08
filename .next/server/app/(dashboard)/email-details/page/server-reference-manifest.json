@@ -1,0 +1,27 @@
+{
+  "node": {
+    "00149256e64808449f969ec4431dcc405c3ae5cf65": {
+      "workers": {
+        "app/(dashboard)/email-details/page": {
+          "moduleId": "[project]/.next-internal/server/app/(dashboard)/email-details/page/actions.js { ACTIONS_MODULE0 => \"[project]/components/auth/actions/logout.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/app/(dashboard)/email-details/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/(dashboard)/email-details/page": "action-browser"
+      }
+    },
+    "407e2ae6cbff941a0d5938280c1d27935f0822c9af": {
+      "workers": {
+        "app/(dashboard)/email-details/page": {
+          "moduleId": "[project]/.next-internal/server/app/(dashboard)/email-details/page/actions.js { ACTIONS_MODULE0 => \"[project]/components/auth/actions/logout.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/app/(dashboard)/email-details/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/(dashboard)/email-details/page": "rsc"
+      }
+    }
+  },
+  "edge": {}
+}
