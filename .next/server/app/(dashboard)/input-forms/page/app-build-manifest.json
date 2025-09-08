@@ -1,0 +1,32 @@
+{
+  "pages": {
+    "/(dashboard)/input-forms/page": [
+      "static/chunks/node_modules_next_dist_1a6ee436._.js",
+      "static/chunks/app_favicon_ico_mjs_659ce808._.js",
+      "static/chunks/_fa5e121f._.js",
+      "static/chunks/[root-of-the-server]__8581a166._.css",
+      "static/chunks/app_layout_tsx_c0237562._.js",
+      "static/chunks/app_error_tsx_1c4448c8._.js",
+      "static/chunks/app_error_tsx_6103465c._.js",
+      "static/chunks/node_modules_next_dist_cc06ae20._.js",
+      "static/chunks/app_not-found_tsx_6103465c._.js",
+      "static/chunks/_99656d9b._.js",
+      "static/chunks/node_modules_tailwind-merge_dist_bundle-mjs_mjs_b854acb4._.js",
+      "static/chunks/node_modules_next_c5fe25eb._.js",
+      "static/chunks/node_modules_37c4b6b9._.js",
+      "static/chunks/app_(dashboard)_layout_tsx_6103465c._.js",
+      "static/chunks/app_(dashboard)_error_tsx_92f7bdbf._.js",
+      "static/chunks/app_(dashboard)_error_tsx_112c2d88._.js",
+      "static/chunks/node_modules_980e7c54._.js",
+      "static/chunks/components_75755b8b._.js",
+      "static/chunks/app_(dashboard)_input-forms_page_tsx_112c2d88._.js",
+      "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_fd44f5a4._.js",
+      "static/chunks/node_modules_next_dist_compiled_2ce9398a._.js",
+      "static/chunks/node_modules_next_dist_client_8f19e6fb._.js",
+      "static/chunks/node_modules_next_dist_2ecbf5fa._.js",
+      "static/chunks/node_modules_@swc_helpers_cjs_00636ac3._.js",
+      "static/chunks/_e69f0d32._.js",
+      "static/chunks/_93808211._.js"
+    ]
+  }
+}

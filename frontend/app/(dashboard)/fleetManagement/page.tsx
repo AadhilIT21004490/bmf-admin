@@ -59,13 +59,13 @@ const fleetmanagement = () => {
     return (
         <>
         <h6>FLEET MANAGEMENT</h6>
-        <div className="flex items-center justify-between bg-gray-900 px-4 my-2 rounded-md">
+        <div className="flex items-center justify-between px-4 my-2 rounded-md bg-white dark:bg-[#273142]">
         {/* Search bar */}
         <div className="flex-1 max-w-sm">
             <input
             type="text"
             placeholder="Search..."
-            className="w-full my-5 px-3 py-2 border rounded-md bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full my-5 px-3 py-2 border rounded-md bg-white dark:bg-[#273142] focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
         </div>
 

@@ -1,0 +1,27 @@
+{
+  "node": {
+    "00149256e64808449f969ec4431dcc405c3ae5cf65": {
+      "workers": {
+        "app/(dashboard)/form-validation/page": {
+          "moduleId": "[project]/.next-internal/server/app/(dashboard)/form-validation/page/actions.js { ACTIONS_MODULE0 => \"[project]/components/auth/actions/logout.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/app/(dashboard)/form-validation/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/(dashboard)/form-validation/page": "action-browser"
+      }
+    },
+    "40a465b2f60dfce9adbc59c71ee03fb6734d10aa4c": {
+      "workers": {
+        "app/(dashboard)/form-validation/page": {
+          "moduleId": "[project]/.next-internal/server/app/(dashboard)/form-validation/page/actions.js { ACTIONS_MODULE0 => \"[project]/components/auth/actions/logout.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/app/(dashboard)/form-validation/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/(dashboard)/form-validation/page": "action-browser"
+      }
+    }
+  },
+  "edge": {}
+}

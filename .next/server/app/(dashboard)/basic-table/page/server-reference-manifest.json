@@ -1,0 +1,16 @@
+{
+  "node": {
+    "00149256e64808449f969ec4431dcc405c3ae5cf65": {
+      "workers": {
+        "app/(dashboard)/basic-table/page": {
+          "moduleId": "[project]/.next-internal/server/app/(dashboard)/basic-table/page/actions.js { ACTIONS_MODULE0 => \"[project]/components/auth/actions/logout.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/(dashboard)/basic-table/page": "action-browser"
+      }
+    }
+  },
+  "edge": {}
+}
