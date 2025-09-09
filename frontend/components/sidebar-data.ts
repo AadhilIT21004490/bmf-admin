@@ -99,7 +99,7 @@ export const data = {
     },
     {
       title: "Profile Settings",
-      url: "/view-profile",
+      url: "/profileSettings",
       icon: CircleUser,
     },
     {

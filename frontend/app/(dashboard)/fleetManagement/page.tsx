@@ -9,7 +9,8 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { Car, ChevronRight, PlusCircle, Sheet, Upload } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { PlusCircle, Sheet, Eye, Edit, Trash2, CircleX } from "lucide-react";
 import Link from "next/link";
 // import { useRouter } from "next/navigation"
 
@@ -148,13 +149,39 @@ const fleetmanagement = () => {
 
                             {/* action */}
                             <TableCell className="py-4 px-4 border-e last:border-e-0 border-b text-center text-primary first:border-s last:border-e border-neutral-200 dark:border-slate-600">
-                                <Link
-                                    href="#"
-                                    className="inline-flex items-center gap-1 text-primary dark:text-primary hover:text-blue-400 text-sm"
+                            <div className="flex justify-center gap-2">
+                                {/* View Button */}
+                                <Link href="/view/123">
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="text-blue-600 hover:text-white hover:bg-blue-600 dark:hover:bg-blue-600"
                                 >
-                                    
-                                    <ChevronRight width={16} height={16} />
+                                    <Eye className="h-5 w-5" />
+                                </Button>
                                 </Link>
+
+                                {/* Edit Button */}
+                                <Link href="/edit/123">
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="text-green-600 hover:text-white hover:bg-green-600 dark:hover:bg-green-600"
+                                >
+                                    <Edit className="h-5 w-5" />
+                                </Button>
+                                </Link>
+
+                                {/* Delete Button */}
+                                <Button
+                                variant="ghost"
+                                size="icon"
+                                className="text-red-600 hover:text-white hover:bg-red-600 dark:hover:bg-red-600"
+                                onClick={() => console.log("Delete action")}
+                                >
+                                <Trash2 className="h-5 w-5" />
+                                </Button>
+                            </div>
                             </TableCell>
 
                         </TableRow>
