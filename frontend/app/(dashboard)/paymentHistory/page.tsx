@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import {
     Table,
     TableBody,
@@ -8,7 +9,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { ChevronRight, PlusCircle, Sheet } from "lucide-react";
+import { ChevronRight, Edit, Eye, PlusCircle, Sheet, Trash2 } from "lucide-react";
 import Link from "next/link";
 
 const sellingProduct = [
@@ -32,6 +33,7 @@ const sellingProduct = [
         id: "#256584",
         name: "Kathryn Murphy",
         date: "10 Feb 2024",
+        reference: "Monthly Fee",
         amount: "$200.00",
         action: "View More",
     },
@@ -69,12 +71,12 @@ const PaymentHistory = () => {
 
         {/* Buttons aligned right */}
         <div className="flex space-x-4">
-            <button className="my-5 p-2 border rounded-md bg-blue-400 hover:bg-blue-900 inline-flex items-center">
+            <button className="my-5 p-2 border rounded-md bg-blue-400 hover:bg-blue-600 inline-flex items-center">
                 <Sheet size={20} className="mr-2" />
                 Export to Excel
             </button>
             <Link href={"/addPayment"}>
-                <button className="my-5 p-2 border rounded-md border-green-600 text-green-600 hover:bg-green-800 hover:text-white inline-flex items-center">
+                <button className="my-5 p-2 border rounded-md border-green-600 text-green-600 hover:bg-green-600 hover:text-white inline-flex items-center">
                 <PlusCircle className="mr-2" />
                 Make New Payment
                 </button>
@@ -139,14 +141,41 @@ const PaymentHistory = () => {
                             </TableCell>
 
                             {/* action */}
+                            {/* action */}
                             <TableCell className="py-4 px-4 border-e last:border-e-0 border-b text-center text-primary first:border-s last:border-e border-neutral-200 dark:border-slate-600">
-                                <Link
-                                    href="#"
-                                    className="inline-flex items-center gap-1 text-primary dark:text-primary hover:text-blue-400 text-sm"
+                            <div className="flex justify-center gap-2">
+                                {/* View Button */}
+                                <Link href="/view/123">
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="text-blue-600 hover:text-white hover:bg-blue-600 dark:hover:bg-blue-600"
                                 >
-                                    {product.action}
-                                    <ChevronRight width={16} height={16} />
+                                    <Eye className="h-5 w-5" />
+                                </Button>
                                 </Link>
+
+                                {/* Edit Button */}
+                                <Link href="/edit/123">
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="text-green-600 hover:text-white hover:bg-green-600 dark:hover:bg-green-600"
+                                >
+                                    <Edit className="h-5 w-5" />
+                                </Button>
+                                </Link>
+
+                                {/* Delete Button */}
+                                <Button
+                                variant="ghost"
+                                size="icon"
+                                className="text-red-600 hover:text-white hover:bg-red-600 dark:hover:bg-red-600"
+                                onClick={() => console.log("Delete action")}
+                                >
+                                <Trash2 className="h-5 w-5" />
+                                </Button>
+                            </div>
                             </TableCell>
 
                         </TableRow>

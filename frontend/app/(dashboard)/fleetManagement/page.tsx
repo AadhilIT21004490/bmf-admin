@@ -9,7 +9,8 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { Car, ChevronRight, PlusCircle, Sheet, Upload } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { PlusCircle, Sheet, Eye, Edit, Trash2, CircleX } from "lucide-react";
 import Link from "next/link";
 // import { useRouter } from "next/navigation"
 
@@ -86,25 +87,25 @@ const fleetmanagement = () => {
         <Table className="table-auto border-spacing-0 border-separate">
             <TableHeader>
                 <TableRow className="border-0">
-                    <TableHead className="px-4 h-12 border-e last:border-e-0 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600 rounded-tl-lg">
+                    <TableHead className="px-4 h-12 border-e last:border-e-0 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s dark:border-slate-600 rounded-tl-lg">
                         Fleet Code
                     </TableHead>
-                    <TableHead className="px-4 h-12 border-e last:border-e-0 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600">
+                    <TableHead className="px-4 h-12 border-e last:border-e-0 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s dark:border-slate-600">
                         Model
                     </TableHead>
-                    <TableHead className="px-4 h-12 border-e last:border-e-0 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600">
+                    <TableHead className="px-4 h-12 border-e last:border-e-0 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s dark:border-slate-600">
                         Menufacturer
                     </TableHead>
-                    <TableHead className="px-4 h-12 border-e last:border-e-0 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600">
+                    <TableHead className="px-4 h-12 border-e last:border-e-0 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s dark:border-slate-600">
                         Vehicle Type
                     </TableHead>
-                    <TableHead className="px-4 h-12 border-e last:border-e-0 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600">
+                    <TableHead className="px-4 h-12 border-e last:border-e-0 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s dark:border-slate-600">
                         YOM
                     </TableHead>
-                    <TableHead className="px-4 h-12 border-e last:border-e-0 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600">
+                    <TableHead className="px-4 h-12 border-e last:border-e-0 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s dark:border-slate-600">
                         Availability
                     </TableHead>
-                    <TableHead className="px-4 h-12 border-e last:border-e-0 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s last:border-e dark:border-slate-600 rounded-tr-lg">
+                    <TableHead className="px-4 h-12 border-e last:border-e-0 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s dark:border-slate-600 rounded-tr-lg">
                         Action
                     </TableHead>
                 </TableRow>
@@ -117,44 +118,73 @@ const fleetmanagement = () => {
                         <TableRow key={index}>
                             {/* fleetcode */}
                             <TableCell
-                                className={`py-4 px-4 border-e last:border-e-0 border-b text-center text-primary first:border-s last:border-e border-neutral-200 dark:border-slate-600 ${isLast ? "rounded-bl-lg" : ""
+                                className={`py-4 px-4 border-e last:border-e-0 border-b text-center text-primary first:border-s border-neutral-200 dark:border-slate-600 ${isLast ? "rounded-bl-lg" : ""
                                     }`}
                             >
-                                {product.fleetCode}
+                                <span className="line-height-1 font-medium text-secondary-light text-sm flex items-center gap-2.5">
+                                    <span className="w-2 h-2 bg-green-600 rounded-full"></span>
+                                    {product.fleetCode}
+                                </span>
                             </TableCell>
 
                             {/* model */}
-                            <TableCell className="py-4 px-4 border-e last:border-e-0 border-b text-center first:border-s last:border-e border-neutral-200 dark:border-slate-600">
+                            <TableCell className="py-4 px-4 border-e last:border-e-0 border-b text-center first:border-s border-neutral-200 dark:border-slate-600">
                                 {product.model}
                             </TableCell>
 
                             {/* menufacturer */}
-                            <TableCell className="py-4 px-4 border-e last:border-e-0 border-b text-center first:border-s last:border-e border-neutral-200 dark:border-slate-600">
+                            <TableCell className="py-4 px-4 border-e last:border-e-0 border-b text-center first:border-s border-neutral-200 dark:border-slate-600">
                                 {product.menufacturer}
                             </TableCell>
 
                             {/* type */}
-                            <TableCell className="py-4 px-4 border-e last:border-e-0 border-b text-center first:border-s last:border-e border-neutral-200 dark:border-slate-600">
+                            <TableCell className="py-4 px-4 border-e last:border-e-0 border-b text-center first:border-s border-neutral-200 dark:border-slate-600">
                                 {product.type}
                             </TableCell>
                             {/* yom */}
-                            <TableCell className="py-4 px-4 border-e last:border-e-0 border-b text-center first:border-s last:border-e border-neutral-200 dark:border-slate-600">
+                            <TableCell className="py-4 px-4 border-e last:border-e-0 border-b text-center first:border-s border-neutral-200 dark:border-slate-600">
                                 {product.yom}
                             </TableCell>
                             {/* availability */}
-                            <TableCell className="py-4 px-4 border-e last:border-e-0 border-b text-center first:border-s last:border-e border-neutral-200 dark:border-slate-600">
+                            <TableCell className="py-4 px-4 border-e last:border-e-0 border-b text-center first:border-s border-neutral-200 dark:border-slate-600">
                                 <Switch id="availability" />
                             </TableCell>
 
                             {/* action */}
-                            <TableCell className="py-4 px-4 border-e last:border-e-0 border-b text-center text-primary first:border-s last:border-e border-neutral-200 dark:border-slate-600">
-                                <Link
-                                    href="#"
-                                    className="inline-flex items-center gap-1 text-primary dark:text-primary hover:text-blue-400 text-sm"
+                            <TableCell className="py-4 px-4 border-e last:border-e-0 border-b text-center text-primary first:border-s border-neutral-200 dark:border-slate-600">
+                            <div className="flex justify-center gap-2">
+                                {/* View Button */}
+                                <Link href="/view/123">
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="text-blue-600 hover:text-white hover:bg-blue-600 dark:hover:bg-blue-600"
                                 >
-                                    
-                                    <ChevronRight width={16} height={16} />
+                                    <Eye className="h-5 w-5" />
+                                </Button>
                                 </Link>
+
+                                {/* Edit Button */}
+                                <Link href="/edit/123">
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="text-green-600 hover:text-white hover:bg-green-600 dark:hover:bg-green-600"
+                                >
+                                    <Edit className="h-5 w-5" />
+                                </Button>
+                                </Link>
+
+                                {/* Delete Button */}
+                                <Button
+                                variant="ghost"
+                                size="icon"
+                                className="text-red-600 hover:text-white hover:bg-red-600 dark:hover:bg-red-600"
+                                onClick={() => console.log("Delete action")}
+                                >
+                                <Trash2 className="h-5 w-5" />
+                                </Button>
+                            </div>
                             </TableCell>
 
                         </TableRow>
