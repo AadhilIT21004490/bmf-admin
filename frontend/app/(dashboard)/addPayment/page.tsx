@@ -3,7 +3,13 @@
 import React, { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-// import AvatarUpload from './avatar-upload';
+import { Button } from "@/components/ui/button";
+import { DatePicker } from "@/components/shared/date-picker";
+import Dropzone from "react-dropzone";
+import { toast } from "react-hot-toast";
+import Link from "next/link";
+import { ArrowBigLeftDash } from "lucide-react";
+import DashboardBreadcrumb from "@/components/layout/dashboard-breadcrumb";
 import {
   Select,
   SelectContent,
@@ -11,191 +17,210 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import DashboardBreadcrumb from "@/components/layout/dashboard-breadcrumb";
-import Link from "next/link";
-import { ArrowBigLeftDash } from "lucide-react";
-import { DatePicker } from "@/components/shared/date-picker";
-import Dropzone from "react-dropzone";
-// import { handleProfileUpdate } from './actions/handleProfileUpdate';
 
-const addPayment = () => {
-  const [files, setFiles] = useState<File[]>([]);
+const AddPayment = () => {
+  const [file, setFile] = useState<File | null>(null);
+  const [reference, setReference] = useState("");
+  const [paymentType, setPaymentType] = useState("");
+  const [amount, setAmount] = useState("");
+  const [paymentDate, setPaymentDate] = useState<Date | null>(new Date());
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!file) {
+      toast.error("Please upload a payment proof file");
+      return;
+    }
+
+    if (!reference || !paymentType || !amount) {
+      toast.error("Please fill in all required fields");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("reference", reference);
+    formData.append("paymentType", paymentType);
+    formData.append("amount", amount);
+    formData.append(
+      "paymentDate",
+      paymentDate ? paymentDate.toISOString() : new Date().toISOString()
+    );
+    formData.append("proofDocument", file);
+
+    setLoading(true);
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_FRONTEND_URL}/v/payment`,
+        {
+          method: "POST",
+          body: formData,
+          credentials: "include",
+        }
+      );
+
+      const data = await res.json();
+      if (data.success) {
+        toast.success("Payment added successfully");
+        setReference("");
+        setPaymentType("");
+        setAmount("");
+        setPaymentDate(new Date());
+        setFile(null);
+      } else {
+        toast.error(data.message || "Something went wrong");
+      }
+    } catch (err: any) {
+      console.error(err);
+      toast.error(err.message || "Server error");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div>
-      <div className="grid grid-cols-4 grid-rows-1 gap-4 rounded-md my-2 px-3 bg-white dark:bg-[#273142]">
+    <div className="p-4">
+      {/* Header / Breadcrumb */}
+      <div className="grid grid-cols-4 gap-4 mb-6 bg-white dark:bg-[#273142] rounded-md px-4 py-3 items-center">
         <div>
           <Link href="/paymentHistory">
-            <button className="my-5 p-2 border rounded-md bg-blue-400 hover:bg-blue-900 inline-flex items-center">
+            <button className="flex items-center gap-2 px-3 py-2 bg-blue-400 hover:bg-blue-900 text-white rounded-md">
               <ArrowBigLeftDash />
               <strong>Back</strong>
             </button>
           </Link>
         </div>
-        <div className="col-span-3 mt-6">
+        <div className="col-span-3">
           <DashboardBreadcrumb
             title="Make New Payment"
             text="Make New Payment"
           />
         </div>
       </div>
-      <h6 className="text-base text-neutral-600 dark:text-neutral-200 my-6">
+
+      <h6 className="text-base text-neutral-600 dark:text-neutral-200 mb-6">
         Make a New Payment
       </h6>
-      {/* <div className="mb-6 mt-4">
-                <AvatarUpload />
-            </div> */}
 
-      <form>
-        <div className="grid grid-cols-1 sm:grid-cols-12 gap-x-6">
-          <div className="col-span-12 sm:col-span-6">
-            <div className="mb-5">
-              <Label
-                htmlFor="name"
-                className="inline-block font-semibold text-neutral-600 dark:text-neutral-200 text-sm mb-2"
-              >
-                Reference <span className="text-red-600">*</span>
-              </Label>
-              <Input
-                name="name"
-                type="text"
-                id="name"
-                placeholder="Enter Full Name"
-                required
-              />
-            </div>
-          </div>
-          <div className="col-span-12 sm:col-span-6">
-            <div className="mb-5">
-              <Label
-                htmlFor="email"
-                className="inline-block font-semibold text-neutral-600 dark:text-neutral-200 text-sm mb-2"
-              >
-                Description <span className="text-red-600">*</span>
-              </Label>
-              <Input
-                name="email"
-                type="email"
-                id="email"
-                placeholder="Enter email address"
-                required
-              />
-            </div>
-          </div>
-
-          <div className="col-span-12 sm:col-span-6">
-            <div className="mb-5">
-              <Label
-                htmlFor="department"
-                className="inline-block font-semibold text-neutral-600 dark:text-neutral-200 text-sm mb-2"
-              >
-                Date
-              </Label>
-              <DatePicker />
-            </div>
-          </div>
-          <div className="col-span-12 sm:col-span-6">
-            <div className="mb-5">
-              <Label
-                htmlFor="number"
-                className="inline-block font-semibold text-neutral-600 dark:text-neutral-200 text-sm mb-2"
-              >
-                Amount
-              </Label>
-              <Input
-                name="number"
-                type="tel"
-                id="number"
-                placeholder="Enter phone number"
-              />
-            </div>
-          </div>
-
-          <div className="col-span-12">
-            <div className="mb-5">
-              <label className="inline-block font-semibold text-neutral-600 dark:text-neutral-200 text-sm mb-2">
-                Upload Files <span className="text-red-600">*</span>
-              </label>
-
-              {/* Dropzone */}
-              <Dropzone
-                accept={{
-                  "image/*": [],
-                  "application/pdf": [],
-                }}
-                multiple
-                onDrop={(acceptedFiles) => {
-                  setFiles((prev) => [...prev, ...acceptedFiles]);
-                }}
-              >
-                {({ getRootProps, getInputProps }) => (
-                  <div
-                    {...getRootProps()}
-                    className="cursor-pointer border-2 border-dashed border-gray-400 p-6 text-center rounded-lg mb-4"
-                  >
-                    <input {...getInputProps()} />
-                    <p className="text-neutral-600 dark:text-neutral-200">
-                      Drag & drop files here, or click to select
-                    </p>
-                    <p className="text-sm text-gray-500">
-                      (Max 2 images/files recommended)
-                    </p>
-                  </div>
-                )}
-              </Dropzone>
-
-              {/* Preview */}
-              {files.length > 0 && (
-                <div className="grid grid-cols-3 gap-3 mt-4">
-                  {files.map((file, idx) => (
-                    <div
-                      key={idx}
-                      className="relative border border-gray-500 rounded-md"
-                    >
-                      {file.type === "application/pdf" ? (
-                        <div className="w-full h-32 flex items-center justify-center bg-gray-200 rounded-lg">
-                          <span className="text-red-600 font-semibold">
-                            📄 {file.name}
-                          </span>
-                        </div>
-                      ) : (
-                        <img
-                          src={URL.createObjectURL(file)}
-                          alt={file.name}
-                          className="w-full h-32 object-cover rounded-lg"
-                        />
-                      )}
-                      <button
-                        type="button"
-                        onClick={() =>
-                          setFiles((prev) => prev.filter((_, i) => i !== idx))
-                        }
-                        className="absolute top-1 right-1 bg-red-500 text-white text-xs px-2 py-1 rounded"
-                      >
-                        ✕
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-1 sm:grid-cols-12 gap-x-6 gap-y-6 bg-white dark:bg-[#273142] p-6 rounded-md"
+      >
+        {/* Reference */}
+        <div className="col-span-12 sm:col-span-6">
+          <Label className="mb-2">
+            Reference <span className="text-red-600">*</span>
+          </Label>
+          <Input
+            type="text"
+            placeholder="NIC number or any unique reference"
+            value={reference}
+            onChange={(e) => setReference(e.target.value)}
+            required
+          />
         </div>
-        <div className="flex items-center justify-center gap-3">
-          <Button
+
+        {/* Payment Type */}
+        <div className="col-span-12 sm:col-span-6">
+          <Label className="mb-2">
+            Payment Type <span className="text-red-600">*</span>
+          </Label>
+          <Select
+            value={paymentType}
+            onValueChange={(value) => setPaymentType(value)}
+          >
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Select payment type" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="Monthly Subscription">
+                Monthly Subscription
+              </SelectItem>
+              <SelectItem value="Prime Membership">Prime Membership</SelectItem>
+              <SelectItem value="Other">Other</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        {/* Amount */}
+        <div className="col-span-12 sm:col-span-6">
+          <Label className="mb-2">
+            Amount (LKR) <span className="text-red-600">*</span>
+          </Label>
+          <Input
+            type="number"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            required
+          />
+        </div>
+
+        {/* Date */}
+        <div className="col-span-12 sm:col-span-6">
+          <Label className="mb-2">
+            Date <span className="text-red-600">*</span>
+          </Label>
+          <DatePicker />
+        </div>
+
+        {/* File Upload */}
+        <div className="col-span-12">
+          <Label className="mb-2">
+            Upload Proof Document <span className="text-red-600">*</span>
+          </Label>
+          <Dropzone
+            multiple={false}
+            accept={{ "image/*": [], "application/pdf": [] }}
+            onDrop={(acceptedFiles) => setFile(acceptedFiles[0])}
+          >
+            {({ getRootProps, getInputProps }) => (
+              <div
+                {...getRootProps()}
+                className="cursor-pointer border-2 border-dashed border-gray-400 p-6 text-center rounded-lg"
+              >
+                <input {...getInputProps()} />
+                {file ? (
+                  <p>{file.name}</p>
+                ) : (
+                  <p>Drag & drop a file here, or click to select</p>
+                )}
+              </div>
+            )}
+          </Dropzone>
+
+          {/* Preview */}
+          {file && file.type !== "application/pdf" && (
+            <img
+              src={URL.createObjectURL(file)}
+              alt="Preview"
+              className="mt-4 w-48 h-32 object-cover rounded-md"
+            />
+          )}
+        </div>
+
+        {/* Buttons */}
+        <div className="col-span-12 flex justify-center gap-3 mt-4">
+          {/* <Button
             type="reset"
             variant="outline"
-            className="h-[48px] border border-red-600 bg-transparent hover:bg-red-600/20 text-red-600 text-base px-14 py-[11px] rounded-lg"
+            className="h-[48px] border border-red-600 text-red-600 px-14 rounded-lg hover:bg-red-600/20"
+            onClick={() => {
+              setReference("");
+              setPaymentType("");
+              setAmount("");
+              setPaymentDate(new Date());
+              setFile(null);
+            }}
           >
             Cancel
-          </Button>
+          </Button> */}
           <Button
             type="submit"
-            className="h-[48px] text-base px-14 py-3 rounded-lg"
+            className="h-[48px] px-14 rounded-lg"
+            disabled={loading}
           >
-            Submit
+            {loading ? "Submitting..." : "Submit Payment"}
           </Button>
         </div>
       </form>
@@ -203,4 +228,4 @@ const addPayment = () => {
   );
 };
 
-export default addPayment;
+export default AddPayment;

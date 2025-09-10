@@ -8,6 +8,7 @@ const vendorSchema = new mongoose.Schema(
       type: String,
       default: "vendor",
     },
+    approvedOn: { type: Date, default: Date.now },
     // Step 1 - Personal
     fullName: { type: String, required: true },
     email: { type: String, required: true, unique: true },
@@ -47,9 +48,24 @@ const vendorSchema = new mongoose.Schema(
       type: [
         {
           paymentId: { type: String, required: true },
+          paymentType: {
+            type: String,
+            enum: [
+              "Registration",
+              "Monthly Subscription",
+              "Prime Membership",
+              "Other",
+            ],
+            required: true,
+          },
+          status: {
+            type: String,
+            enum: ["Pending", "Approved", "Rejected"],
+            default: "Pending",
+          },
           amount: { type: Number, required: true },
           paymentDate: { type: Date, default: Date.now }, // auto-fill with current date
-          paymentMethod: { type: String, required: true },
+          reference: { type: String, required: true },
           proofDocument: { type: String, required: true },
         },
       ],

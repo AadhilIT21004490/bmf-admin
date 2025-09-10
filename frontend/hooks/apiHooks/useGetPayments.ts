@@ -1,31 +1,32 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Fleet } from "@/types/fleet";
-export const useGetFleets = () => {
-  const [fleets, setFleets] = useState<Fleet[]>([]);
+import { payment } from "@/types/payment";
+
+export const useGetPayments = () => {
+  const [payments, setPayments] = useState<payment[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchFleets = async () => {
+    const fetchPayments = async () => {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_FRONTEND_URL}/v/fleet`,
+          `${process.env.NEXT_PUBLIC_FRONTEND_URL}/v/payment`,
           {
             credentials: "include",
           }
         );
         const data = await res.json();
-        setFleets(data.fleets);
+        setPayments(data.payments);
       } catch (err: any) {
-        setError(err.message || "Failed to fetch fleets");
+        setError(err.message || "Failed to fetch payments");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchFleets();
+    fetchPayments();
   }, []);
 
-  return { fleets, loading, error };
+  return { payments, loading, error };
 };

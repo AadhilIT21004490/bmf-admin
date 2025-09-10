@@ -15,6 +15,7 @@ import Link from "next/link";
 
 import { useGetFleets } from "@/hooks/apiHooks/useGetFleets";
 import LoadingSkeleton from "@/components/loading-skeleton";
+import ErrorMessage from "@/components/error-message";
 // import { useRouter } from "next/navigation"
 
 // const sellingProduct = [
@@ -65,6 +66,9 @@ const fleetmanagement = () => {
   if (loading) {
     return <LoadingSkeleton height="h-screen" text="Getting Fleets..." />;
   }
+  if (error) {
+    return <ErrorMessage error={error} page="fleet management" />;
+  }
   return (
     <>
       <h6>FLEET MANAGEMENT</h6>
@@ -111,8 +115,12 @@ const fleetmanagement = () => {
               YOM
             </TableHead>
             <TableHead className="px-4 h-12 border-e last:border-e-0 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s dark:border-slate-600">
+              Views
+            </TableHead>
+            <TableHead className="px-4 h-12 border-e last:border-e-0 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s dark:border-slate-600">
               Availability
             </TableHead>
+
             <TableHead className="px-4 h-12 border-e last:border-e-0 text-center bg-neutral-100 dark:bg-slate-700 border-t border-neutral-200 first:border-s dark:border-slate-600 rounded-tr-lg">
               Action
             </TableHead>
@@ -131,7 +139,7 @@ const fleetmanagement = () => {
                   }`}
                 >
                   <span className="line-height-1 font-medium text-secondary-light text-sm flex items-center gap-2.5">
-                    <span className="w-2 h-2 bg-green-600 rounded-full"></span>
+                    <span className="w-2 h-2 bg-green-600 rounded-full animate-pulse"></span>
                     {fleet.fleetId}
                   </span>
                 </TableCell>
@@ -153,6 +161,10 @@ const fleetmanagement = () => {
                 {/* yom */}
                 <TableCell className="py-4 px-4 border-e last:border-e-0 border-b text-center first:border-s border-neutral-200 dark:border-slate-600">
                   {fleet.yom}
+                </TableCell>
+                {/* views */}
+                <TableCell className="py-4 px-4 border-e last:border-e-0 border-b text-center first:border-s border-neutral-200 dark:border-slate-600">
+                  {fleet.views}
                 </TableCell>
                 {/* availability */}
                 <TableCell className="py-4 px-4 border-e last:border-e-0 border-b text-center first:border-s border-neutral-200 dark:border-slate-600">

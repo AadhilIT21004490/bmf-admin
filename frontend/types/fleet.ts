@@ -1,5 +1,6 @@
 // types/fleet.ts
 export interface Fleet {
+  views: number;
   _id: string;
   fleetId: string;
   model: string;
