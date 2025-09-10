@@ -118,3 +118,23 @@ export const createFleet = async (req, res) => {
     });
   }
 };
+
+export const getfleets = async (req, res) => {
+  try {
+    const user = req.user;
+
+    const fleets = await Fleet.find({ vendor: user._id });
+
+    return res.status(200).json({
+      fleets,
+      success: true,
+    });
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({
+      error: "Internal Server Error",
+      message: error.message,
+      success: false,
+    });
+  }
+};
