@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import { connectDB } from "./configs/db.js";
 import { ENV } from "./configs/env.js";
 import authRoutes from "./routes/auth.routes.js";
+import fleetRoutes from "./routes/fleet.routes.js";
 
 const app = express();
 
@@ -29,5 +30,6 @@ app.use("/api/v/health", (req, res) =>
   res.status(200).json("Im healthy dont worry :)")
 );
 app.use("/api/v/auth", authRoutes);
+app.use("/api/v/fleet", fleetRoutes);
 
 app.listen(port, () => console.log(`Server is up and running on ${port}`));
