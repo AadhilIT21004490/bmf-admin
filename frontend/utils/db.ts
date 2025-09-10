@@ -9,10 +9,16 @@ interface User {
 const users: User[] = [
   {
     id: "1",
-    email: "wowdash@gmail.com",
-    name: "Wowdash",
+    email: "admin@gmail.com",
+    name: "superAdmin",
     password: "Pa$$w0rd!"
   }
+  // {
+  //   id: "1",
+  //   email: "wowdash@gmail.com",
+  //   name: "Wowdash",
+  //   password: "Pa$$w0rd!"
+  // }
 ]
 
 export async function getUserFromDb(email: string, hashedPassword: string): Promise<User | null> {

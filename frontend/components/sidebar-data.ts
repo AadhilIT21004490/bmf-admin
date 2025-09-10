@@ -1,5 +1,6 @@
 import {
   Boxes,
+  Bus,
   CalendarDays,
   Car,
   ChartPie,
@@ -8,13 +9,19 @@ import {
   DollarSign,
   House,
   Layout,
+  LayoutDashboardIcon,
   LogOut,
+  LogOutIcon,
   Mail,
+  Mails,
   MessageCircleMore,
+  Receipt,
   Server,
   Settings,
   ShieldCheck,
+  ShieldUser,
   StickyNote,
+  Users2,
   UsersRound,
 } from "lucide-react";
 
@@ -93,6 +100,11 @@ export const data = {
       icon: Car,
     },
     {
+      title: "Calendar",
+      url: "/calendar",
+      icon: CalendarDays,
+    },
+    {
       title: "Payment History",
       url: "/paymentHistory",
       icon: DollarSign,
@@ -107,21 +119,56 @@ export const data = {
       url: "#",
       icon: LogOut,
     },
+    // {
+    //   title: "Email",
+    //   url: "/email",
+    //   icon: Mail,
+    // },
+    // {
+    //   title: "Chat",
+    //   url: "/chat",
+    //   icon: MessageCircleMore,
+    // },
+    // ==============================================
     {
-      title: "Email",
-      url: "/email",
-      icon: Mail,
+      label: "Super Admin",
     },
     {
-      title: "Chat",
-      url: "/chat",
-      icon: MessageCircleMore,
+      title: "Dashboard",
+      url: "/",
+      icon: LayoutDashboardIcon,
     },
     {
-      title: "Calendar",
-      url: "/calendar",
-      icon: CalendarDays,
+      title: "Vendor Management",
+      url: "/s",
+      icon: Users2,
     },
+    {
+      title: "Fleets",
+      url: "/sa",
+      icon: Bus,
+    },
+    {
+      title: "Payouts",
+      url: "/ca",
+      icon: Receipt,
+    },
+    {
+      title: "Email & SMS",
+      url: "/q",
+      icon: Mails,
+    },
+    {
+      title: "Admin Settings",
+      url: "/5",
+      icon: ShieldUser,
+    },
+    {
+      title: "Logout Admin",
+      url: "/saw",
+      icon: LogOutIcon,
+    },
+    // ==============================================
     {
       label: "UI Elements",
     },
