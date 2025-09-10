@@ -1,8 +1,9 @@
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import { connectDB } from "./configs/db.js";
 import { ENV } from "./configs/env.js";
-// import vendorRoutes from "./routes/vendor.routes.js";
+import authRoutes from "./routes/auth.routes.js";
 
 const app = express();
 
@@ -11,7 +12,15 @@ await connectDB();
 
 // Middlewares
 app.use(express.json());
-app.use(cors());
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 const port = ENV.PORT || 8002;
 
@@ -19,6 +28,6 @@ const port = ENV.PORT || 8002;
 app.use("/api/v/health", (req, res) =>
   res.status(200).json("Im healthy dont worry :)")
 );
-// app.use("/api/v", vendorRoutes);
+app.use("/api/v/auth", authRoutes);
 
 app.listen(port, () => console.log(`Server is up and running on ${port}`));
