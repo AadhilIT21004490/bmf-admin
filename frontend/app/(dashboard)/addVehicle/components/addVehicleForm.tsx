@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {amenitiesOptions} from "@/data/index"
+import { amenitiesOptions } from "@/data/index";
 import { Textarea } from "@/components/ui/textarea";
 
 interface AddVehicleFormProps {
@@ -20,12 +20,20 @@ interface AddVehicleFormProps {
 
 const AddVehicleForm: React.FC<AddVehicleFormProps> = ({ data, setData }) => {
   const handleChange = (key: string, value: any) => {
-    setData((prev: any) => ({ ...prev, [key]: value }));
+    if (key === "largeLuggage" || key === "handLuggage") {
+      setData((prev: any) => ({
+        ...prev,
+        luggageCapacity: {
+          ...prev.luggageCapacity,
+          [key]: Number(value),
+        },
+      }));
+    } else {
+      setData((prev: any) => ({ ...prev, [key]: value }));
+    }
   };
 
-
-
-const handleAmenityChange = (amenity: string, checked: boolean) => {
+  const handleAmenityChange = (amenity: string, checked: boolean) => {
     setData((prev: any) => {
       const currentAmenities = prev.amenities || [];
       return {
@@ -46,7 +54,9 @@ const handleAmenityChange = (amenity: string, checked: boolean) => {
       <div className="grid grid-cols-1 sm:grid-cols-12 gap-x-6">
         {/* Model */}
         <div className="col-span-12 sm:col-span-6 mb-5">
-          <Label htmlFor="model" className="mb-2">Model <span className="text-red-600">*</span></Label>
+          <Label htmlFor="model" className="mb-2">
+            Model <span className="text-red-600">*</span>
+          </Label>
           <Input
             id="model"
             value={data.model || ""}
@@ -58,7 +68,9 @@ const handleAmenityChange = (amenity: string, checked: boolean) => {
 
         {/* Manufacturer */}
         <div className="col-span-12 sm:col-span-6 mb-5">
-          <Label htmlFor="manufacturer" className="mb-2">Manufacturer <span className="text-red-600">*</span></Label>
+          <Label htmlFor="manufacturer" className="mb-2">
+            Manufacturer <span className="text-red-600">*</span>
+          </Label>
           <Input
             id="manufacturer"
             value={data.manufacturer || ""}
@@ -70,12 +82,14 @@ const handleAmenityChange = (amenity: string, checked: boolean) => {
 
         {/* Year */}
         <div className="col-span-12 sm:col-span-6 mb-5">
-          <Label htmlFor="year" className="mb-2">Year of Manufacture <span className="text-red-600">*</span></Label>
+          <Label htmlFor="year" className="mb-2">
+            Year of Manufacture <span className="text-red-600">*</span>
+          </Label>
           <Input
-            id="year"
+            id="yom"
             type="number"
-            value={data.year || ""}
-            onChange={(e) => handleChange("year", e.target.value)}
+            value={data.yom || ""}
+            onChange={(e) => handleChange("yom", e.target.value)}
             placeholder="e.g. 2022"
             required
           />
@@ -83,7 +97,9 @@ const handleAmenityChange = (amenity: string, checked: boolean) => {
 
         {/* Vehicle Type */}
         <div className="col-span-12 sm:col-span-6 mb-5">
-          <Label htmlFor="vehicleType" className="mb-2">Vehicle Type <span className="text-red-600">*</span></Label>
+          <Label htmlFor="vehicleType" className="mb-2">
+            Vehicle Type <span className="text-red-600">*</span>
+          </Label>
           <Select
             value={data.vehicleType || ""}
             onValueChange={(val) => handleChange("vehicleType", val)}
@@ -104,7 +120,9 @@ const handleAmenityChange = (amenity: string, checked: boolean) => {
 
         {/* Transmission */}
         <div className="col-span-12 sm:col-span-6 mb-5">
-          <Label htmlFor="transmission" className="mb-2">Transmission <span className="text-red-600">*</span></Label>
+          <Label htmlFor="transmission" className="mb-2">
+            Transmission <span className="text-red-600">*</span>
+          </Label>
           <Select
             value={data.transmission || ""}
             onValueChange={(val) => handleChange("transmission", val)}
@@ -121,7 +139,9 @@ const handleAmenityChange = (amenity: string, checked: boolean) => {
 
         {/* Fuel Type */}
         <div className="col-span-12 sm:col-span-6 mb-5">
-          <Label htmlFor="fuelType" className="mb-2">Fuel Type <span className="text-red-600">*</span></Label>
+          <Label htmlFor="fuelType" className="mb-2">
+            Fuel Type <span className="text-red-600">*</span>
+          </Label>
           <Select
             value={data.fuelType || ""}
             onValueChange={(val) => handleChange("fuelType", val)}
@@ -139,7 +159,9 @@ const handleAmenityChange = (amenity: string, checked: boolean) => {
 
         {/* Description */}
         <div className="col-span-12 mb-5">
-          <Label htmlFor="description" className="mb-2">Description</Label>
+          <Label htmlFor="description" className="mb-2">
+            Description
+          </Label>
           <Textarea
             id="description"
             value={data.description || ""}
@@ -150,7 +172,9 @@ const handleAmenityChange = (amenity: string, checked: boolean) => {
 
         {/* Doors */}
         <div className="col-span-12 sm:col-span-6 mb-5">
-          <Label htmlFor="doors" className="mb-2">Doors</Label>
+          <Label htmlFor="doors" className="mb-2">
+            Doors
+          </Label>
           <Input
             id="doors"
             type="number"
@@ -162,7 +186,9 @@ const handleAmenityChange = (amenity: string, checked: boolean) => {
 
         {/* Seats */}
         <div className="col-span-12 sm:col-span-6 mb-5">
-          <Label htmlFor="seats" className="mb-2">Seats</Label>
+          <Label htmlFor="seats" className="mb-2">
+            Seats
+          </Label>
           <Input
             id="seats"
             type="number"
@@ -174,7 +200,9 @@ const handleAmenityChange = (amenity: string, checked: boolean) => {
 
         {/* Km/Day */}
         <div className="col-span-12 sm:col-span-6 mb-5">
-          <Label htmlFor="kmPerDay" className="mb-2">Km/Day</Label>
+          <Label htmlFor="kmPerDay" className="mb-2">
+            Km/Day
+          </Label>
           <Input
             id="kmPerDay"
             type="number"
@@ -189,14 +217,14 @@ const handleAmenityChange = (amenity: string, checked: boolean) => {
           <Label htmlFor="luggageCapacity">Luggage Capacity</Label>
           <div className="grid grid-cols-2 gap-3 mt-2">
             <Input
-              value={data.largeLuggage || ""}
+              value={data.luggageCapacity?.largeLuggage ?? ""}
               onChange={(e) => handleChange("largeLuggage", e.target.value)}
               type="number"
-              placeholder="Large"
+              placeholder="Large Luggage"
               min={0}
             />
             <Input
-              value={data.handLuggage || ""}
+              value={data.luggageCapacity?.handLuggage ?? ""}
               onChange={(e) => handleChange("handLuggage", e.target.value)}
               type="number"
               placeholder="Hand Luggage"
@@ -224,7 +252,6 @@ const handleAmenityChange = (amenity: string, checked: boolean) => {
             ))}
           </div>
         </div>
-        
       </div>
     </div>
   );

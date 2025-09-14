@@ -10,15 +10,48 @@ interface PriceDetailsFormProps {
 }
 
 const durations = [
-  { id: "1week", days: 7, label: "For 1 Week", totalPlaceholder: "Total for 1 Week" },
-  { id: "2weeks", days: 14, label: "For 2 Weeks", totalPlaceholder: "Total for 2 Weeks" },
-  { id: "3weeks", days: 21, label: "For 3 Weeks", totalPlaceholder: "Total for 3 Weeks" },
-  { id: "1month", days: 30, label: "For 1 Month", totalPlaceholder: "Total for 1 Month" },
-  { id: "3months", days: 90, label: "For 3 Months", totalPlaceholder: "Total for 3 Months" },
-  { id: "6months", days: 180, label: "For 6 Months & Over", totalPlaceholder: "Total for 6 Months & Over" },
+  {
+    id: "oneWeekandBelow",
+    days: 7,
+    label: "For 1 Week",
+    totalPlaceholder: "Total for 1 Week",
+  },
+  {
+    id: "twoWeeks",
+    days: 14,
+    label: "For 2 Weeks",
+    totalPlaceholder: "Total for 2 Weeks",
+  },
+  {
+    id: "threeWeeks",
+    days: 21,
+    label: "For 3 Weeks",
+    totalPlaceholder: "Total for 3 Weeks",
+  },
+  {
+    id: "oneMonth",
+    days: 30,
+    label: "For 1 Month",
+    totalPlaceholder: "Total for 1 Month",
+  },
+  {
+    id: "threeMonths",
+    days: 90,
+    label: "For 3 Months",
+    totalPlaceholder: "Total for 3 Months",
+  },
+  {
+    id: "sixMonthsAndAbove",
+    days: 180,
+    label: "For 6 Months & Over",
+    totalPlaceholder: "Total for 6 Months & Over",
+  },
 ];
 
-const PriceDetailsForm: React.FC<PriceDetailsFormProps> = ({ data, setData }) => {
+const PriceDetailsForm: React.FC<PriceDetailsFormProps> = ({
+  data,
+  setData,
+}) => {
   const handleChange = (id: string, value: number) => {
     setData((prev) => ({
       ...prev,

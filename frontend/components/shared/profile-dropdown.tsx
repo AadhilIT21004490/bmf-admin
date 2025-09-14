@@ -11,11 +11,17 @@ import Image from "next/image";
 import Link from "next/link";
 import Logout from "@/components/auth/logout";
 import userImg from "@/public/assets/images/user.png";
-import { useSession } from "next-auth/react";
+
+const dummyUser = {
+  name: "Robiul Hasan",
+  email: "robiul@example.com",
+  image: "/assets/images/user.png", // you can point to the same userImg imported above or a URL string
+  role: "Admin",
+};
 
 const ProfileDropdown = () => {
-  const { data: session } = useSession();
-  console.log("session", session?.user?.image);
+  // Instead of session, use dummyUser directly
+  const user = dummyUser;
 
   return (
     <DropdownMenu>
@@ -27,13 +33,13 @@ const ProfileDropdown = () => {
             "rounded-full sm:w-10 sm:h-10 w-8 h-8 bg-gray-200/75 hover:bg-slate-200 focus-visible:ring-0 dark:bg-slate-700 dark:hover:bg-slate-600 border-0 cursor-pointer data-[state=open]:bg-gray-300 data-[state=open]:ring-4 data-[state=open]:ring-slate-300 dark:data-[state=open]:ring-slate-500 dark:data-[state=open]:bg-slate-600"
           )}
         >
-          {session?.user?.image ? (
+          {user?.image ? (
             <Image
-              src={session?.user?.image}
+              src={user.image}
               className="rounded-full"
               width={40}
               height={40}
-              alt={session?.user?.name ?? "User profile"}
+              alt={user.name ?? "User profile"}
             />
           ) : (
             <Image
@@ -52,15 +58,13 @@ const ProfileDropdown = () => {
         side="bottom"
         align="end"
       >
-        <div className="py-3 px-4 rounded-lg bg-primary/10 dark:bg-primar flex items-center justify-between">
+        <div className="py-3 px-4 rounded-lg bg-primary/10 dark:bg-primary flex items-center justify-between">
           <div>
             <h6 className="text-lg text-neutral-900 dark:text-white font-semibold mb-0">
-              {session?.user?.image && session?.user?.name
-                ? session?.user?.name
-                : "Robiul Hasan"}
+              {user?.name || "User"}
             </h6>
             <span className="text-sm text-neutral-500 dark:text-neutral-300">
-              Admin
+              {user?.role || "User"}
             </span>
           </div>
         </div>
